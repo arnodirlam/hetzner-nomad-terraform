@@ -1,0 +1,10 @@
+# Environment variables
+.envrc
+
+# Terraform
+.terraform*
+*.auto.tfvars
+*.tfstate*
+
+# Secret files
+creds.json
