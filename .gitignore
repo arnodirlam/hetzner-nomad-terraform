@@ -3,7 +3,7 @@
 
 # Terraform
 .terraform*
-*.auto.tfvars
+*.tfvars*
 *.tfstate*
 
 # Secret files

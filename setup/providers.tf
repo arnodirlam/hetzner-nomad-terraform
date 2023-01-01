@@ -3,11 +3,11 @@ provider "hcloud" {
 }
 
 provider "nomad" {
-  address   = "http://${module.nomad.ipv4_addresses[0]}:4646"
-  secret_id = jsondecode(data.local_file.creds.content)["nomad"]
+  address   = var.nomad_address
+  secret_id = var.nomad_secret_id
 }
 
 provider "consul" {
-  address = "http://${module.nomad.ipv4_addresses[0]}:8500"
-  token   = jsondecode(data.local_file.creds.content)["consul"]
+  address = var.consul_address
+  token   = var.consul_token
 }
