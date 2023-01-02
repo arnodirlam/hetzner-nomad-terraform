@@ -10,7 +10,7 @@ Sets up a working consul+nomad cluster on hcloud using Terraform, so you can eas
 1. Create or choose a project in the [Hetzner Cloud Console](https://console.hetzner.cloud/projects)
 2. Under Security > SSH Keys, ensure it has a SSH key named `nomad`
 3. Under Security > API Tokens, ensure there is a token that you have copied (not the "fingerprint")
-4. Create a file `config.auto.tfvars` in the `setup` folder with the content:
+4. Create a file `config.auto.tfvars` with the content:
 
 ```
 hcloud_token = "your hcloud token"
@@ -19,7 +19,7 @@ ssh_key      = "~/.ssh/nomad"
 
 ### Bootstrap
 
-When starting from scratch, first run this in the `setup` folder:
+When starting from scratch, first run this:
 
 ```
 ./bootstrap.sh
@@ -33,7 +33,7 @@ subsequent setup of resources.
 
 ### Iterating
 
-Run `terraform apply` in the `setup` folder.
+Run `terraform apply`.
 
 ## Components
 

@@ -1,5 +1,14 @@
 locals {
-  user_data = {
+  user_data_input = {
+    "node_class"   = "nomad-server"
+    "datacenter"   = "dc1"
+    "servers"      = []
+    "interface"    = "eth0"
+    "consul_token" = ""
+    "nomad_token"  = ""
+  }
+
+  server_init_config = {
     apt = {
       sources = {
         "hashicorp-releases.list" = {
@@ -27,18 +36,18 @@ locals {
       {
         path        = "/etc/nomad.d/nomad.hcl"
         permissions = "0644"
-        content     = templatefile("${path.module}/data/nomad.hcl.tmpl", var.input)
+        content     = templatefile("${path.module}/templates/nomad.hcl.tmpl", local.user_data_input)
         }, {
         path        = "/etc/consul.d/consul.hcl"
         permissions = "0644"
-        content     = templatefile("${path.module}/data/consul.hcl.tmpl", var.input)
+        content     = templatefile("${path.module}/templates/consul.hcl.tmpl", local.user_data_input)
         }, {
         path        = "/usr/bin/bootstrap.sh"
         permissions = "0755"
-        content     = templatefile("${path.module}/data/bootstrap.sh", var.input)
+        content     = templatefile("${path.module}/templates/bootstrap.sh", local.user_data_input)
       }
     ]
   }
-}
 
-variable "input" {}
+  server_user_data = "#cloud-config\n${yamlencode(local.server_init_config)}"
+}

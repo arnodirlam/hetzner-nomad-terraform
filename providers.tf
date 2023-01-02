@@ -11,3 +11,6 @@ provider "consul" {
   address = var.consul_address
   token   = var.consul_token
 }
+
+provider "remote" {
+}
