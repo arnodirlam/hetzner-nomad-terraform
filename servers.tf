@@ -36,6 +36,8 @@ resource "remote_file" "consul_config" {
     "servers"   = []
     "interface" = "eth0"
   })
+
+  depends_on = [null_resource.nomad]
 }
 
 resource "null_resource" "consul_config" {
@@ -71,6 +73,8 @@ resource "remote_file" "nomad_config" {
     "servers"    = []
     "interface"  = "eth0"
   })
+
+  depends_on = [null_resource.nomad]
 }
 
 resource "null_resource" "nomad_config" {

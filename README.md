@@ -17,20 +17,6 @@ hcloud_token = "your hcloud token"
 ssh_key      = "~/.ssh/nomad"
 ```
 
-### Bootstrap
-
-When starting from scratch, first run this:
-
-```
-./bootstrap.sh
-```
-
-This will bootstrap a Consul and Nomad cluster and run Terraform only up to the point of writing a
-`_creds.auto.tfvars.json` file in the directory you're running Terraform in. This is needed for the
-subsequent setup of resources.
-
-(This step is needed, because Terraform [does not support dynamic provider configuration](https://github.com/hashicorp/terraform/issues/25244))
-
 ### Iterating
 
 Run `terraform apply`.

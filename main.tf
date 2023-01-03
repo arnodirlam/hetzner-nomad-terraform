@@ -39,16 +39,6 @@ data "local_file" "creds" {
   depends_on = [null_resource.nomad]
 }
 
-resource "local_sensitive_file" "creds" {
-  filename = "${path.module}/_creds.auto.tfvars"
-  content  = <<EOH
-nomad_address   = "http://${local.server_ipv4_addresses[0]}:4646"
-nomad_secret_id = "${jsondecode(data.local_file.creds.content)["nomad"]}"
-consul_address  = "http://${local.server_ipv4_addresses[0]}:8500"
-consul_token    = "${jsondecode(data.local_file.creds.content)["consul"]}"
-  EOH
-}
-
 resource "consul_key_prefix" "secrets" {
   path_prefix = "secrets/"
 
