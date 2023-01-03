@@ -13,6 +13,7 @@ resource "hcloud_server" "server" {
   datacenter  = random_shuffle.dc[count.index].result[0]
   ssh_keys    = var.ssh_keys
   server_type = var.server_type
+  keep_disk   = !var.server_disk_scaling
   user_data   = local.server_user_data
   labels      = merge(var.labels, { "Name" = var.prefix })
 

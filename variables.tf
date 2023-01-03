@@ -36,6 +36,11 @@ variable "server_type" {
   default = "cx11"
 }
 
+variable "server_disk_scaling" {
+  description = "Increase disk size when scaling up servers? Warning: Servers cannot be scaled down again when this is enabled"
+  default     = false
+}
+
 variable "image" {
   default = "ubuntu-20.04"
 }
