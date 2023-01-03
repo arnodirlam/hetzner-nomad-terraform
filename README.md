@@ -21,14 +21,13 @@ ssh_key      = "~/.ssh/nomad"
 
 Run `terraform apply`.
 
-## Components
+## Adding services
 
-- nomad server which runs services for:
-  - nomad-autoscaler
-  - prometheus
-  - redis
+All `*.hcl` files under `nomad_jobs` will be synced to the running Nomad server/cluster.
 
-Autoscaler scales hcloud nodes for redis. After successful run both Nomad and Consul are wide-world open and credentials for both you can find in terraform output
+Using Consul Connect a.k.a. Service Mesh requires also setting up Consul intentions to configure
+what services are allowed to connect to each other. The file `consul_intentions.tf.example` has
+some examples on how to do that.
 
 ## Acknowledgements
 

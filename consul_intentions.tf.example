@@ -1,0 +1,33 @@
+# Consul intentions for using Consul Connect a.k.a. Service Mesh
+#
+# Add one intention for each service that should be reachable by other services ("sources").
+#
+# Docs: https://developer.hashicorp.com/consul/docs/connect/intentions
+
+# resource "consul_config_entry" "count_api" {
+#   name = "count-api"
+#   kind = "service-intentions"
+
+#   config_json = jsonencode({
+#     Sources = [{
+#       Name       = "count-dashboard"
+#       Action     = "allow"
+#       Precedence = 9
+#       Type       = "consul"
+#     }]
+#   })
+# }
+
+# resource "consul_config_entry" "postgres" {
+#   name = "postgresql"
+#   kind = "service-intentions"
+
+#   config_json = jsonencode({
+#     Sources = [{
+#       Name       = "webserver"
+#       Action     = "allow"
+#       Precedence = 9
+#       Type       = "consul"
+#     }]
+#   })
+# }

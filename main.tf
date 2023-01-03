@@ -30,7 +30,7 @@ resource "null_resource" "nomad" {
   }
 
   provisioner "local-exec" {
-    command = "scp -i ${var.ssh_key} root@${local.server_ipv4_addresses[0]}:/tmp/creds.json ${path.root}/creds.json"
+    command = "scp -o \"StrictHostKeyChecking no\" -i ${var.ssh_key} root@${local.server_ipv4_addresses[0]}:/root/creds.json ${path.root}/creds.json"
   }
 }
 
