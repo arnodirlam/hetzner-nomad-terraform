@@ -31,5 +31,11 @@ some examples on how to do that.
 
 ## Acknowledgements
 
-Thanks to [@AndrewChubatiuk](https://github.com/AndrewChubatiuk) for the demo setup in [AndrewChubatiuk/nomad-hcloud-autoscaler](https://github.com/AndrewChubatiuk/nomad-hcloud-autoscaler/tree/main/demo).
-This was initially copied from there.
+- All the great companies and organizations fostering open-source projects:
+  HashiCorp, Traefik Labs, Internet Security Research Group (ISRG), GitHub
+- [@AndrewChubatiuk](https://github.com/AndrewChubatiuk) for the demo setup in
+  [AndrewChubatiuk/nomad-hcloud-autoscaler](https://github.com/AndrewChubatiuk/nomad-hcloud-autoscaler/tree/main/demo).
+  This was initially copied from there.
+- [@icicimov](https://github.com/icicimov) for the in-depth
+  [blog post](https://icicimov.github.io/blog/devops/Automated-SSL-Certificates-management-HAProxy-Consul-LetsEncrypt-AWS/)
+  on running Certbot with Consul

@@ -43,9 +43,17 @@ resource "consul_key_prefix" "secrets" {
   path_prefix = "secrets/"
 
   subkeys = {
-    "hcloud/token" = var.hcloud_token
-    "consul/token" = jsondecode(data.local_file.creds.content)["consul"]
-    "nomad/token"  = jsondecode(data.local_file.creds.content)["nomad"]
+    "hcloud/token"     = var.hcloud_token
+    "hetznerdns/token" = var.hetznerdns_token
+    "consul/token"     = jsondecode(data.local_file.creds.content)["consul"]
+    "nomad/token"      = jsondecode(data.local_file.creds.content)["nomad"]
+  }
+}
+
+resource "consul_keys" "letsencrypt_email" {
+  key {
+    path  = "letsencrypt/email"
+    value = var.letsencrypt_email
   }
 }
 

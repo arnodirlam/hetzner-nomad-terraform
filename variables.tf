@@ -6,6 +6,17 @@ variable "hcloud_token" {
   sensitive = true
 }
 
+variable "hetznerdns_token" {
+  sensitive   = true
+  description = "API token for Hetzner DNS (different from HCloud etc.) for requesting Let's Encrypt wildcard certificates such as *.example.com"
+  default     = null
+}
+
+variable "letsencrypt_email" {
+  type        = string
+  description = "E-mail address for requesting Let's Encrypt SSL certifictes"
+}
+
 variable "location" {
   type    = string
   default = "fsn1"
