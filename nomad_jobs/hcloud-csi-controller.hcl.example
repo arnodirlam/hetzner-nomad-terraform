@@ -1,0 +1,40 @@
+job "hcloud-csi-controller" {
+  datacenters = ["dc1"]
+
+  group "hcloud-csi-controller" {
+    task "plugin" {
+      driver = "docker"
+
+      config {
+        image      = "hetznercloud/hcloud-csi-driver:2.1.0"
+        command    = "local/start.sh"
+        privileged = true
+      }
+
+      env {
+        ENABLE_METRICS = true
+        CSI_ENDPOINT   = "unix://csi/csi.sock"
+      }
+
+      csi_plugin {
+        id        = "csi.hetzner.cloud"
+        type      = "controller"
+        mount_dir = "/csi"
+      }
+
+      template {
+        destination = "local/start.sh"
+        perms       = "744"
+        data        = <<EOD
+#!/usr/bin/env ash
+HCLOUD_TOKEN="{{ key "secrets/hcloud/token" }}" /bin/hcloud-csi-driver-controller
+EOD
+      }
+
+      resources {
+        cpu    = 100
+        memory = 64
+      }
+    }
+  }
+}

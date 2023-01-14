@@ -1,0 +1,66 @@
+# Each volume must be created in HCloud and then registered in Nomad.
+# It can then be used in job descriptions.
+#
+# Example
+# -------
+#
+# job "postgres" {
+#   group "postgres" {
+#     volume "data" {
+#       type      = "csi"
+#       plugin_id = "csi.hetzner.cloud"
+#       source    = "postgres-data"
+#       per_alloc = true
+#
+#       access_mode     = "single-node-writer"
+#       attachment_mode = "file-system"
+#
+#       mount_options {
+#         fs_type     = "ext4"
+#         mount_flags = ["discard", "defaults"]
+#       }
+#     }
+#
+#     task "postgres" {
+#       # ...
+#
+#       env {
+#         PGDATA = "/var/lib/postgresql/data/pgdata"
+#       }
+#
+#       volume_mount {
+#         volume      = "data"
+#         destination = "/var/lib/postgresql/data"
+#         read_only   = false
+#       }
+#     }
+#   }
+# }
+
+resource "hcloud_volume" "postgres_data" {
+  count             = 1
+  name              = "postgres-data-${count.index}"
+  location          = hcloud_server.server[0].location
+  size              = 10
+  automount         = false
+  format            = "ext4"
+  delete_protection = true
+}
+
+resource "nomad_volume" "postgres_data" {
+  count     = length(hcloud_volume.postgres_data)
+  plugin_id = "csi.hetzner.cloud"
+
+  external_id = hcloud_volume.postgres_data[count.index].id
+  name        = "postgres-data[${count.index}]"
+  volume_id   = "postgres-data[${count.index}]"
+
+  capability {
+    access_mode     = "single-node-writer"
+    attachment_mode = "file-system"
+  }
+
+  mount_options {
+    fs_type = "ext4"
+  }
+}

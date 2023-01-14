@@ -31,3 +31,8 @@ acl = {
   policy_ttl        = "60s"
   replication_token = ""
 }
+plugin "docker" {
+  config {
+    allow_privileged = true
+  }
+}
