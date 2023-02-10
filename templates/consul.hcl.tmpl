@@ -18,3 +18,7 @@ connect {
 ports {
   grpc = 8502
 }
+telemetry {
+  prometheus_retention_time = "60s"
+  disable_hostname = true
+}

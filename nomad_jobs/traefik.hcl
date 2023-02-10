@@ -36,6 +36,11 @@ job "traefik" {
       name = "traefik"
       port = "http"
 
+      meta {
+        metrics_port = "${NOMAD_HOST_PORT_metrics}"
+        metrics_path = "/metrics"
+      }
+
       connect {
         native = true
       }
@@ -103,6 +108,12 @@ job "traefik" {
 [providers.file]
     directory = "/local/config"
     watch     = true
+
+[metrics]
+  [metrics.prometheus]
+    entryPoint = "metrics"
+    addServicesLabels = true
+    addRoutersLabels = true
 EOF
       }
 
