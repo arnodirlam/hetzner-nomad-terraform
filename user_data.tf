@@ -12,11 +12,11 @@ locals {
     apt = {
       sources = {
         "hashicorp-releases.list" = {
-          keyid  = "9DC858229FC7DD38854AE2D88D81803C0EBFCD88"
+          keyid  = "798AEC654E5C15428C8E42EEAA16FCBCA621E701"
           source = "deb [arch=amd64] https://apt.releases.hashicorp.com $RELEASE main"
         }
         "docker.list" = {
-          keyid  = "E8A032E094D8EB4EA189D270DA418C88A3219F7B"
+          keyid  = "9DC858229FC7DD38854AE2D88D81803C0EBFCD88"
           source = "deb [arch=amd64] https://download.docker.com/linux/ubuntu $RELEASE stable"
         }
       }
