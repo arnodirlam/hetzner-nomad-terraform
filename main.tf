@@ -50,9 +50,9 @@ resource "consul_key_prefix" "secrets" {
   }
 }
 
-resource "consul_keys" "letsencrypt_email" {
+resource "consul_keys" "certbot_email" {
   key {
-    path  = "letsencrypt/email"
+    path  = "certbot/email"
     value = var.letsencrypt_email
   }
 }
